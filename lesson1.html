@@ -1,0 +1,57 @@
+<head>
+	<meta charset="utf8">
+	<link rel="stylesheet" href="resource/style.css">
+</head>
+<body>
+	<h1>DOM-структура</h1>
+	<div class="wrap">
+		<p>
+			DOM - ( document object model ), объектная модель документа.
+			DOM предостовляет js возможность взаимодействовать с элементами страницы ( div, input, form, etc).
+			Все элементы страницы в DOM представляются, как обычные js объекты со своими методами, прототипами и свойствами
+			Группа элементов (например все div-ы) могут представлять html-коллекции ( почти как массив, но не совсем).
+			DOM создается при загрузки страницы, тут есть одно но!, модель создется постепенно ( грубо говоря сверху вниз )
+			поэтому js не может обратиться к DOM-узлу ( DOM можно представлять, как дерево, где каждый элемент это DOM-узел) 
+			, пока он не будет создан, напрмер
+		</p>
+		<div class="code">
+			<div class="comment">//Например у нас есть такая html страничка</div>
+			&#8249;body&#8250; <br>
+			&emsp;&emsp;&#8249;div id="firstDiv"&#8250; &#8249;/div&#8250; <br>
+			&#8249;/body&#8250;
+		</div>
+		<p>
+			И мы хотим иметь доступ к элементу div с id "firstDiv".
+			DOM предоставляет нам метод объекта document - getElementById(id), возвращает DOM-узел с id, 
+			указанным в качестве параметра, либо NULL, если элемента с таким id ну существует.
+			Теперь попробуем получить наш див
+		</p>
+		<div class="code">
+			&#8249;script&#8250; <br>
+				&emsp;&emsp;var div = document.getElementById("firstDiv"); <br>
+				&emsp;&emsp;console.log(div) <span class="comment">// вернет null</span> <br>
+			&#8249;/script&#8250; <br>
+				&emsp;&emsp;&#8249;div id="firstDiv" &#8250; &#8249;/div&#8250; <br>
+			&#8249;script&#8250; <br>
+				&emsp;&emsp;var div = document.getElementById("firstDiv"); <br>
+				&emsp;&emsp;console.log(div) <span class="comment">// вернет объект нашего div-a</span> <br>
+			&#8249;/script&#8250; <br>
+		</div>
+		<p>
+			Почему же в первом случае код возращает NULL, во втором же случае возвращет уже готовый объект?
+			Суть как раз в том, что на момент выполнения первого скрипта, div-a с id firstDiv еще не существует ( бразуер грубо говоря еще не дошел до него)
+			следовательно и в DOM-дереве такого узла нет. Второй же раз, скрипт вызывается, когда в DOM-дереве уже есть нужный узел. Поэтому код возвращает нужный нам объект.
+			DOM предостовляет нам несколько методов, для поиска объектов:
+		</p>
+		<div class="code">
+			<span class="comment">// Поиск по id элемента</span><br>
+			&emsp;&emsp;var idElement = document.getElementById("id") <br>
+			<span class="comment">// Поиск по классу элемента. Возвращает html-коллекцию</span><br>
+			&emsp;&emsp;var classElements = document.getElementsById("class") <br>
+			<span class="comment">// Поиск по тегу ( div, input, li )</span><br>
+			&emsp;&emsp;var tagElements = document.getElementsByTagName("tag") <br>
+			<span class="comment">// Поиск по css-селектору</span><br>
+			&emsp;&emsp;var queryElement = document.querySelector("selector") <br> 
+		</div>
+	</div>
+</body>
